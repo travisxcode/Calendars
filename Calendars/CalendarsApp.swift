@@ -11,7 +11,7 @@ import SwiftUI
 struct CalendarsApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DatePickerView()
         }
     }
 }

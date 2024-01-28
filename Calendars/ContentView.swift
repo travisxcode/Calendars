@@ -1,24 +1,41 @@
-//
-//  ContentView.swift
-//  Calendars
-//
-//  Created by Taeshawit Suwanwigo on 25/1/2567 BE.
-//
+//  Created by Trevis Suwanwigo.
 
 import SwiftUI
 
-struct ContentView: View {
+struct DatePickerView: View {
+    @State private var date = Date()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!/nCalendars")
+        NavigationView {
+            List {
+                Section(header: Text("Displayed Components")) {
+                    DatePicker("Default", selection: $date)
+                    DatePicker("Date", selection: $date, displayedComponents: .date)
+                    DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                }
+                Section(header: Text("Date Range")) {
+                    DatePicker("Until Today", selection: $date, in: ...Date(), displayedComponents: .date)
+                    DatePicker("From Today", selection: $date, in: Date()..., displayedComponents: .date)
+                }
+                Section(header: Text("STYLE")) {
+                    DatePicker("Automatic", selection: $date, in: ...Date(), displayedComponents: .date)
+                        .datePickerStyle(.automatic)
+                    DatePicker("Compact", selection: $date, in: ...Date(), displayedComponents: .date)
+                        .datePickerStyle(.compact)
+                    DatePicker("Graphical", selection: $date, in: ...Date(), displayedComponents: .date)
+                        .datePickerStyle(.graphical)
+                    DatePicker("Graphical", selection: $date, in: ...Date(), displayedComponents: .date)
+                        .datePickerStyle(.wheel)
+                }
+            }
+            .navigationTitle("DatePicker")
+            .navigationBarTitleDisplayMode(.large)
         }
-        .padding()
     }
 }
 
-#Preview {
-    ContentView()
+struct DatePickerView_Previews: PreviewProvider {
+    static var previews: some View {
+        DatePickerView()
+    }
 }
